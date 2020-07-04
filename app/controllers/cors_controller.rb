@@ -5,17 +5,19 @@ class CorsController < ApplicationController
     render json: { title: title }
   end
 
+  require 'open-uri'
+  
   def get_metadata
-    require 'open-uri'
     url = params[:url]
     # https://github.com/jhy/jsoup/issues/976
     # https://medium.com/@tusharseth93/scraping-the-web-a-fast-and-simple-way-to-scrape-amazon-b3d6d74d649f
     user_agent = "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)"
-    document = Nokogiri::HTML(open(url, "User-Agent" => user_agent))
+    html = URI.open(url, "User-Agent" => user_agent)
+    document = Nokogiri::HTML(html)
 
     open_graph = document.css('meta[property^="og"]')
 
-    if open_graph.present?
+    if open_graph.any?
       result = open_graph.map { |elm| [elm['property'].delete_prefix("og:"), elm['content']] }.to_h
     else
       result = {

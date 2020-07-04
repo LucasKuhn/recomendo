@@ -67,6 +67,21 @@
         <div class="form-group">
           <%= f.label :url, "Link" %>
           <%= f.text_field :url, class:"form-control", placeholder:"" %>
+          <small>
+          <div class="card d-none mx-2" id="url-preview">
+            <div class="row no-gutters">
+              <div class="col-md-3">
+                <img src="" class="card-img w-100 h-100" id="url-image" style="object-fit: cover">
+              </div>
+              <div class="col-md-9">
+                <div class="card-body p-1">
+                  <h5 class="card-title" id="url-title"></h5>
+                  <p class="card-text" id="url-description"></p>
+                </div>
+              </div>
+            </div>
+          </div>
+          </small>
         </div>
 
         <div class="form-group">
@@ -85,6 +100,88 @@
   </div>
 </div>
 
+<script>
+// Get Metadata from URL
+
+const input = document.getElementById('post_url');
+const function_url = "https://383j3ff4ze.execute-api.sa-east-1.amazonaws.com/default/getUrlMetadata?url="
+
+input.addEventListener('keyup', function (e) {
+  url = input.value;
+  if ( isValidHttpUrl(url) ) {
+    $("#url-preview").parent().append(spinner)
+    fetch(function_url + url)
+    .then(response => response.json())
+    .then(json => showUrlCard(json))
+  } else {
+    $("#url-preview").addClass('d-none')
+  }
+});
+
+function showUrlCard(json) {
+  document.getElementById("url-title").innerText = json.title
+  document.getElementById("url-description").innerText = json.description
+  document.getElementById("url-image").src = json.image
+  $(".spinner").remove()
+  $("#url-preview").removeClass('d-none')
+}
+
+function isValidHttpUrl(string) {
+  let url;
+  try {
+    url = new URL(string);
+  } catch (_) {
+    return false;
+  }
+  return url.protocol === "http:" || url.protocol === "https:";
+}
+
+var card = `
+<div class="row no-gutters">
+  <div class="col-md-3">
+    <img src="" class="card-img w-100 h-100" id="url-image" style="object-fit: cover">
+  </div>
+  <div class="col-md-9">
+    <div class="card-body p-1">
+      <h5 class="card-title" id="url-title"></h5>
+      <p class="card-text" id="url-description"></p>
+    </div>
+  </div>
+</div>
+`
+var spinner = `
+<div class="text-center my-2 text-primary spinner" style="opacity:0.2">
+  <div class="spinner-border" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
+</div>
+`
+
+// input.addEventListener('keyup', function (e) {
+//     clearTimeout(timeout);
+//     timeout = setTimeout(function () {
+//       url = input.value;
+//       console.log('Value:', url);
+//       if ( validURL(url) ) {
+//         fetch(function_url + url)
+//         .then(response => response.json())
+//         .then(json => console.log(json))
+//       }
+//     }, 400);
+// });
+
+
+
+function validURL(str) {
+  var pattern = new RegExp('^(https?:\\/\\/)?'+ // protocol
+  '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|'+ // domain name
+  '((\\d{1,3}\\.){3}\\d{1,3}))'+ // OR ip (v4) address
+  '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*'+ // port and path
+  '(\\?[;&a-z\\d%_.~+=-]*)?'+ // query string
+  '(\\#[-a-z\\d_]*)?$','i'); // fragment locator
+  return !!pattern.test(str);
+}
+</script>
 <script>
 document.addEventListener('turbolinks:load', function(){
   $('#cancel-modal').on('click', function () {
@@ -166,5 +263,4 @@ if($('.modal.show').length > 0)
     $('body').addClass('modal-open');
 }
 });
-
 </script>
