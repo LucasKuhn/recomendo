@@ -64,9 +64,9 @@ pt-BR:
       reset_password_instructions:
         action: Redefinir minha senha
         greeting: Olá %{recipient}!
-        instruction: Alguém fez o pedido para redefinir sua senha, e você pode fazer isso clicando no link abaixo.
-        instruction_2: Se você não fez este pedido, por favor ignore este e-mail.
-        instruction_3: Sua senha não será alterada até que você acesse o link acima e crie uma nova.
+        instruction: Esqueceu sua senha do Recomendo? Pelo menos não foi a chave de casa! Para criar uma nova senha, basta clicar no link abaixo.
+        instruction_2: Se você não fez este pedido de redefinição se senha, por favor ignore este e-mail.
+        instruction_3: Sua senha só será alterada quando você acessar o link acima e criar uma nova senha.
         subject: Instruções de redefinição de senha
       unlock_instructions:
         action: Desbloquear minha conta
@@ -79,8 +79,8 @@ pt-BR:
       success: Autorizado com sucesso de uma conta de %{kind}.
     passwords:
       edit:
-        change_my_password: Alterar minha senha
-        change_your_password: Alterar sua senha
+        change_my_password: Salvar
+        change_your_password: Altere sua senha
         confirm_new_password: Confirme sua nova senha
         new_password: Nova senha
       new:

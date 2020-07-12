@@ -120,5 +120,5 @@ Rails.application.configure do
     password: Rails.application.credentials.dig(:mailer, :password)
   }
   # doesn't have to be Heroku, but you get the idea.
-  config.action_mailer.default_url_options = { :host => 'recomendoapp.com' }
+  config.action_mailer.default_url_options = { :host => 'www.recomendoapp.com' }
 end

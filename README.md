@@ -43,3 +43,8 @@ heroku pg:reset -a recomendo
 heroku run rails db:migrate -a recomendo
 heroku run rails db:seed -a recomendo
 ```
+
+
+# To edit devise views
+1. Check what view you are using (based on [Devise i18n](https://github.com/tigrish/devise-i18n))
+2. Get some good references at [Devise bootstrap views](https://github.com/hisea/devise-bootstrap-views)
