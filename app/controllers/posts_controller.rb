@@ -1,4 +1,6 @@
 class PostsController < ApplicationController
+  include Pagy::Backend
+
   before_action :set_post, only: [:show, :edit, :update, :destroy, :read_more]
 
   # GET /posts
@@ -7,7 +9,7 @@ class PostsController < ApplicationController
     if params[:all].present?
       @posts = Post.filter(params)
     else
-      @posts = Post.filter(params).posted_by(current_user.followings)
+      @pagy, @posts = pagy(Post.filter(params).posted_by(current_user.followings), items: 6)
     end
     @filtered_category = Category.find(params[:category_id]) if params[:category_id]
     @filtered_tags = params[:tags]

@@ -11,6 +11,11 @@
 </div>
 <% end %>
 
+<div data-controller="infine-scroll">
+
+</div>
 <div class="row row-cols-1 row-cols-md-2 my-3">
   <%= render partial: "post", collection: @posts %>
 </div>
+
+<%= pagy_nav(@pagy).html_safe %>
