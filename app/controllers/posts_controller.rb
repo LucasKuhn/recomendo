@@ -14,6 +14,14 @@ class PostsController < ApplicationController
     @filtered_category = Category.find(params[:category_id]) if params[:category_id]
     @filtered_tags = params[:tags]
     @posts_from_all = params[:all].present?
+    respond_to do |format|
+      format.html
+      format.json {
+        render json: {
+          entries: render_to_string(@posts, formats: [:html]), pagination: view_context.pagy_nav(@pagy)
+        }
+      }
+    end
   end
 
   # GET /posts/1
