@@ -1,6 +1,4 @@
 class PostsController < ApplicationController
-  include Pagy::Backend
-
   before_action :set_post, only: [:show, :edit, :update, :destroy, :read_more]
 
   # GET /posts

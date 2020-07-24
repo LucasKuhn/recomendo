@@ -1,0 +1,11 @@
+<div data-controller="infinite-scroll" data-action="scroll@window->infinite-scroll#scroll">
+
+  <div data-target="infinite-scroll.entries" class="row row-cols-1 row-cols-md-2 my-3">
+      <%= render @posts %>
+  </div>
+
+  <div data-target="infinite-scroll.pagination" class="d-none">
+    <%= pagy_nav(@pagy).html_safe %>
+  </div>
+
+</div>

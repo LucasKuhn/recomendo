@@ -5,6 +5,7 @@ export default class extends Controller {
   static loading_more = false;
 
   scroll() {
+    // console.log("Scroll called")
     let next_page = this.paginationTarget.querySelector("a[rel='next']")
     if(next_page == null) { return }
     // console.log(window.pageYOffset)
@@ -16,24 +17,21 @@ export default class extends Controller {
     if (window.pageYOffset >= height - window.innerHeight - 300) {
       if ( !this.loading_more ) {
         this.loading_more = true
-        console.log("loading_more")
+        // console.log("loading_more")
         this.loadMore(url)
       }
     }
 
   }
 
-  printf() {
-    console.log("Reached the end!")
-  }
-
   loadMore(url) {
+    // debugger;
     Rails.ajax({
       type: 'GET',
       url: url,
       dataType: 'json',
       success: (data) => {
-        console.log(data)
+        // debugger;
         this.entriesTarget.insertAdjacentHTML('beforeend', data.entries)
         this.paginationTarget.innerHTML = data.pagination
         this.loading_more = false
