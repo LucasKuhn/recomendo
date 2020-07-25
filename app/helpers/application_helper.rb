@@ -1,4 +1,5 @@
 module ApplicationHelper
+  include Pagy::Frontend
 
   def alert_class(flash_type)
     case flash_type.to_sym

@@ -6,7 +6,15 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user
+    @pagy, @posts = pagy(@user.posts, items: 4)
+    respond_to do |format|
+      format.html
+      format.json {
+        render json: {
+          entries: render_to_string(@posts, formats: [:html]), pagination: view_context.pagy_nav(@pagy)
+        }
+      }
+    end
   end
 
   def edit

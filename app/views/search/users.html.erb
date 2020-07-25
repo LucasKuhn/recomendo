@@ -1,0 +1,14 @@
+<%= render 'form' %>
+
+<div data-controller="infinite-scroll" data-action=" scroll@window->infinite-scroll#scroll" id="search-result">
+    <div data-target="infinite-scroll.entries" id="entries">
+        <%= render partial: "/users/user", collection: @users %>
+    </div>
+
+    <div data-target="infinite-scroll.pagination" id="entries-pagination" class="d-none">
+      <%= pagy_nav(@pagy).html_safe %>
+    </div>
+
+</div>
+
+<%= render 'keyup_handler' %>

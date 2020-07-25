@@ -1,0 +1,2 @@
+document.querySelector('#entries').innerHTML = "<%= j render partial: 'users/user', collection: @users %>"
+document.querySelector('#entries-pagination').innerHTML = "<%= j pagy_nav(@pagy).html_safe %>"

@@ -1,0 +1,37 @@
+<script>
+  var spinner = `
+  <div class="text-center my-5 text-primary" style="opacity:0.2">
+  <div class="spinner-border" role="status">
+  <span class="sr-only">Loading...</span>
+  </div>
+  </div>
+  `
+
+  function delay(fn, ms) {
+    let timer = 0
+    return function(...args) {
+      clearTimeout(timer)
+      timer = setTimeout(fn.bind(this, ...args), ms || 0)
+    }
+  }
+
+  $( "input" ).keyup(function() {
+    $("#entries").html(spinner);
+  });
+
+  $('input').keyup(
+    delay(function (e) {
+      Rails.ajax({
+        type: 'GET',
+        url: this.form.action,
+        dataType: 'script',
+        data: $(this).serialize(),
+        success: (data) => {
+          console.log("JS Success!!")
+          // Trigger the scroll event to load more
+          window.dispatchEvent(new Event('scroll'));
+        }
+      })
+    }, 400)
+  );
+</script>

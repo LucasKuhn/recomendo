@@ -41,8 +41,12 @@ class User < ApplicationRecord
     if image.attached?
       image.variant(resize: 100)
     else
-      "https://api.adorable.io/avatars/100/#{email}"
+      adorable_avatar
     end
+  end
+
+  def adorable_avatar
+    "https://api.adorable.io/avatars/100/#{email}"
   end
 
   # https://mensfeld.pl/2013/12/rails-devise-and-remember_me-rememberable-by-default/

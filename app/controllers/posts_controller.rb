@@ -7,11 +7,19 @@ class PostsController < ApplicationController
     if params[:all].present?
       @posts = Post.filter(params)
     else
-      @posts = Post.filter(params).posted_by(current_user.followings)
+      @pagy, @posts = pagy(Post.filter(params).posted_by(current_user.followings), items: 6)
     end
     @filtered_category = Category.find(params[:category_id]) if params[:category_id]
     @filtered_tags = params[:tags]
     @posts_from_all = params[:all].present?
+    respond_to do |format|
+      format.html
+      format.json {
+        render json: {
+          entries: render_to_string(@posts, formats: [:html]), pagination: view_context.pagy_nav(@pagy)
+        }
+      }
+    end
   end
 
   # GET /posts/1

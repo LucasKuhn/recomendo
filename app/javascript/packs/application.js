@@ -28,6 +28,7 @@ require("css/site");
 import("js/add_to_homescreen");
 import("js/fontawesome");
 import("js/tagsinput");
+import("js/stimulus_extra");
 
 // Uncomment to copy all static images under ../images to the output folder and reference
 // them with the image_pack_tag helper in views (e.g <%= image_pack_tag 'rails.png' %>)
@@ -43,3 +44,11 @@ if (navigator.serviceWorker) {
       console.log(reg);
     });
 }
+
+// src/application.js
+import { Application } from "stimulus"
+import { definitionsFromContext } from "stimulus/webpack-helpers"
+
+const application = Application.start()
+const context = require.context("./controllers", true, /\.js$/)
+application.load(definitionsFromContext(context))
