@@ -1,0 +1,10 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target" : {
+      "namespace": "android_app",
+      "package_name": "com.recomendoapp.www",
+      "sha256_cert_fingerprints": ["E9:81:35:03:75:56:DE:96:22:C8:71:F9:63:7B:49:9F:A5:FA:DE:A5:A6:64:CC:C4:52:0B:2D:18:A0:ED:4D:E4"]
+    }
+  }
+]
