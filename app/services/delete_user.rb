@@ -11,7 +11,7 @@ class DeleteUser
       user.received_follows.destroy_all
       user.given_follows.destroy_all
 
-      user.image.purge_now if user.image.attached?
+      user.image.purge if user.image.attached?
 
       user.destroy
     end
