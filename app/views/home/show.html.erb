@@ -34,7 +34,7 @@
         <% end %>
       </div>
 
-      <div class="row d-none" id='login-button'>
+      <div class="row">
         <div class="col-7">
           <%= link_to "Entrar", new_user_session_path, class: 'btn btn-lg btn-secondary w-100' %>
           <%= link_to t("devise.shared.links.sign_up"), new_registration_path(:user), class: 'btn btn-outline-secondary w-100 mt-3' %>
@@ -166,19 +166,17 @@
   const isAndroidApp = document.referrer.includes('android-app://');
   const isInStandaloneMode = (window.navigator.standalone) || (window.matchMedia('(display-mode: standalone)').matches); // https://web.dev/customize-install/
 
-  document.querySelector('#login-button').classList.toggle('d-none');
-
   if ( !isInStandaloneMode || !isAndroidApp || isMobileDevice ) {
     if ( isIos ) {
       const isSafari = !(/(CriOS|FxiOS|OPiOS|mercury)/i.test(window.navigator.userAgent));
       const isInAppBrowser = /Instagram|Twitter|GSA|FBAN/.test(window.navigator.userAgent);
       if ( isSafari && !isInAppBrowser ) {
-        document.querySelector('#apple-button').classList.toggle('d-none');
+        document.querySelector('#apple-button').classList.remove('d-none');
       } else {
-        document.querySelector('#apple-safari-button').classList.toggle('d-none');
+        document.querySelector('#apple-safari-button').classList.remove('d-none');
       }
     } else {
-      document.querySelector('#mobile-button').classList.toggle('d-none');
+      document.querySelector('#mobile-button').classList.remove('d-none');
     }
   }
 
@@ -208,7 +206,6 @@
   btnInstallApp.addEventListener('click', e => {
     if(deferredPrompt !== undefined) {
       deferredPrompt.prompt()
-      document.querySelector('#login-button').classList.remove('d-none')
       document.querySelector('#mobile-button').classList.add('d-none')
       // deferredPrompt.userChoice
       // .then(choiceResult => {
