@@ -4,7 +4,10 @@
     "target" : {
       "namespace": "android_app",
       "package_name": "com.recomendoapp.www",
-      "sha256_cert_fingerprints": ["E9:81:35:03:75:56:DE:96:22:C8:71:F9:63:7B:49:9F:A5:FA:DE:A5:A6:64:CC:C4:52:0B:2D:18:A0:ED:4D:E4"]
+      "sha256_cert_fingerprints": [
+        "E9:81:35:03:75:56:DE:96:22:C8:71:F9:63:7B:49:9F:A5:FA:DE:A5:A6:64:CC:C4:52:0B:2D:18:A0:ED:4D:E4",
+        "5B:A6:53:53:52:FF:9A:16:CB:8D:B7:B1:07:45:72:9E:29:BC:59:76:9F:26:42:69:3C:71:0C:30:88:D5:03:49"
+      ]
     }
   }
 ]
