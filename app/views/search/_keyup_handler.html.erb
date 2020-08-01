@@ -16,7 +16,7 @@
   }
 
   $( "input" ).keyup(function() {
-    $("#entries").html(spinner);
+    document.querySelector(`[data-target="infinite-scroll.entries"]`).innerHTML = spinner    
   });
 
   $('input').keyup(

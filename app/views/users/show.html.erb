@@ -1,4 +1,4 @@
-<div class="my-3 p-3 bg-white border-radius-1 box-shadow">
+<div class="my-3 py-3 bg-white border-radius-1 box-shadow">
   <div class="row mx-3">
     <div class="col-md-4">
       <div class="d-flex align-items-center justify-content-center">
@@ -22,48 +22,38 @@
       </div>
 
       <div class="d-flex justify-content-center justify-content-md-start">
-        <%= link_to "#", class: "d-inline text-decoration-none text-dark", data: {toggle: "modal", target: "#followers_modal"} do %>
-          <span class="mr-2"><strong><%= @user.followers_count - 1 %></strong> seguidores
-            <span class="mr-2"><strong><%= @user.posts.count %></strong> recomendações</span>
-        <% end %>
+        <div>
+          <% if @user == current_user %>
+            <table class="table table-sm mb-0 table-borderless">
+              <tr onclick="window.location='<%= user_followers_path(@user) %>'">
+                <td><strong><%= @user.followers_count - 1 %></strong></td>
+                <td>Seguidores</td>
+              </tr>
+              <tr>
+                <td><strong><%= @user.posts.count %></strong></td>
+                <td>Recomendações</td>
+                <td></td>
+                <td></td>
+              </tr>
+            </table>
+          <% else %>
+          <div class="text-center text-md-left px-1">
+            <strong><%= @user.posts.count %></strong>
+            Recomendações
+          </div>
+          <% end %>
+
+        </div>
       </div>
 
+      <% if @user != current_user %>
       <div class="my-2 text-center text-md-left">
-        <%= render "users/follow", user: @user unless @user == current_user %>
+        <%= render "users/follow", user: @user %>
       </div>
+      <% end %>
 
     </div>
   </div>
 </div>
 
 <%= render 'posts/posts' %>
-
-<% content_for :bottom_modal do %>
-  <div class="modal fade" id="followers_modal" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-body">
-          <ul class="nav nav-tabs w-100" role="tablist">
-            <li class="nav-item">
-              <a class="nav-link active" data-toggle="tab" href="#user-followers-tab" role="tab">Seguidores</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" data-toggle="tab" href="#user-followings-tab" role="tab">Seguindo</a>
-            </li>
-          </ul>
-          <button type="button" class="close position-absolute p-4" data-dismiss="modal" style="top:0; right:0">
-            <span>&times;</span>
-          </button>
-          <div class="tab-content">
-            <div class="tab-pane fade show active" id="user-followers-tab" role="tabpanel">
-              <%= render partial: "user", collection: @user.followers.without(@user) %>
-            </div>
-            <div class="tab-pane fade" id="user-followings-tab" role="tabpanel">
-              <%= render partial: "user", collection: @user.followings.without(@user) %>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-<% end %>
