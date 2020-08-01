@@ -1,0 +1,23 @@
+<div class="p-3 bg-white border-radius-1 shadow text-center">
+  <h5><%= link_to @user.full_name, user_path(@user), class: "text-dark" %></h5><hr>
+  <ul class="nav nav-pills nav-fill w-100">
+    <li class="nav-item">
+      <%= link_to "Seguidores", user_followers_path(@user), class: "nav-link rounded-pill #{'active' if controller_name == 'followers'}" %>
+    </li>
+    <li class="nav-item">
+      <%= link_to "Seguindo", user_followings_path(@user), class: "nav-link rounded-pill #{'active' if controller_name == 'followings'}" %>
+    </li>
+  </ul>
+</div>
+
+<div data-controller="infinite-scroll" data-action="scroll@window->infinite-scroll#scroll">
+
+  <div data-target="infinite-scroll.entries">
+    <%= render partial: "users/user", collection: @users %>
+  </div>
+
+  <div data-target="infinite-scroll.pagination" class="d-none">
+    <%= pagy_nav(@pagy).html_safe %>
+  </div>
+
+</div>

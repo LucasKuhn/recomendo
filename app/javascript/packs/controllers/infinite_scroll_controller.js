@@ -5,8 +5,9 @@ export default class extends Controller {
   static loading_more = false;
 
   scroll() {
-    // console.log("Scroll called")
+    console.log("Scroll called")
     let next_page = this.paginationTarget.querySelector("a[rel='next']")
+    // console.log(next_page)
     if(next_page == null) { return }
     // console.log(window.pageYOffset)
     let url = next_page.href
@@ -25,16 +26,15 @@ export default class extends Controller {
   }
 
   loadMore(url) {
-    // debugger;
     Rails.ajax({
       type: 'GET',
       url: url,
       dataType: 'json',
       success: (data) => {
-        // debugger;
         this.entriesTarget.insertAdjacentHTML('beforeend', data.entries)
         this.paginationTarget.innerHTML = data.pagination
         this.loading_more = false
+        this.scroll()
       }
     })
   }

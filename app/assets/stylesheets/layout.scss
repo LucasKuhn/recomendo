@@ -68,3 +68,11 @@
 .color-creamy {
   color: rgba(255, 234, 228, 0.4)
 }
+
+
+// Fix issue with scrollbar 'twitching' the body to be a bit more narrow
+// https://aykevl.nl/2014/09/fix-jumping-scrollbar
+html {
+    width:100vw;
+    overflow-x:hidden;
+}

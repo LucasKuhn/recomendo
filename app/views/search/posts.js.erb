@@ -1,2 +1,3 @@
-document.querySelector('#entries').innerHTML = "<%= j render partial: 'posts/post', collection: @posts %>"
-document.querySelector('#entries-pagination').innerHTML = "<%= j pagy_nav(@pagy).html_safe %>"
+var entries = document.querySelector(`[data-target="infinite-scroll.entries"]`)
+entries.innerHTML = "<%= j render partial: 'posts/post', collection: @posts %>"
+document.querySelector(`[data-target="infinite-scroll.pagination"]`).innerHTML = "<%= j pagy_nav(@pagy).html_safe %>"

@@ -2,6 +2,8 @@ Rails.application.routes.draw do
   devise_for :users, controllers: { registrations: "registrations" }
   resources :users do
     resources :follows
+    resource :followers
+    resource :followings
   end
   resources :tags
   resources :categories
