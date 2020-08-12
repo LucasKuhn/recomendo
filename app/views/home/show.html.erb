@@ -16,27 +16,25 @@
 
       <h2>Bem vindo ao Recomendo</h2>
       <p class="lead">
-        Salve recomendações de filmes e seriados, recomende livros para seus amigos e descubra os podcasts que seus amigos mais gostam.
+        Salve recomendações de livros e filmes, recomende seriados para seus amigos e descubra os podcasts que seus amigos mais gostam.
       </p>
 
-      <div class="my-3 my-md-0">
-        <%= link_to "https://recomendoapp.com", class: "btn btn-lg btn-outline-secondary d-none", target:'_blank', id: 'open-app-button' do %>
-          Abrir app
-        <% end %>
+      <div class="my-3">
         <%= link_to "#", class: "btn btn-lg btn-outline-secondary d-none", data: {toggle: "modal", target: "#appleModal"}, id: 'apple-button' do %>
           <i class="fab fa-apple"></i><br> Baixar
         <% end %>
         <%= link_to "#", class: "btn btn-lg btn-outline-secondary d-none", data: {toggle: "modal", target: "#appleSafariModal"}, id: 'apple-safari-button' do %>
           <i class="fab fa-safari"></i> Abrir no Safari
         <% end %>
-        <%= link_to "#", class: "btn btn-lg btn-outline-secondary d-none", data: {toggle: "modal", target: "#mobileModal"}, id: 'mobile-button' do %>
-          <i class="fas fa-mobile"></i><br> Baixar
+        <%= link_to "https://play.google.com/store/apps/details?id=com.recomendoapp.www", class: "btn btn-lg btn-outline-secondary d-none", id: 'google-play-button', target: "_blank" do %>
+          <i class="fab fa-google-play"></i><br> Baixar
         <% end %>
-        <div class="row d-none" id='login-button'>
-          <div class="col-7">
-            <%= link_to "Entrar", new_user_session_path, class: 'btn btn-lg btn-secondary w-100' %>
-            <%= link_to t("devise.shared.links.sign_up"), new_registration_path(:user), class: 'btn btn-outline-secondary w-100 mt-3' %>
-          </div>
+      </div>
+
+      <div class="row">
+        <div class="col-7">
+          <%= link_to "Entrar", new_user_session_path, class: 'btn btn-lg btn-secondary w-100' %>
+          <%= link_to t("devise.shared.links.sign_up"), new_registration_path(:user), class: 'btn btn-outline-secondary w-100 mt-3' %>
         </div>
       </div>
 
@@ -52,9 +50,6 @@
     </div>
   </div>
 
-  <div class="text-center">
-    <%= link_to "Entrar pelo site", new_user_session_path, class: "btn btn-outline-secondary" %>
-  </div>
 </div>
 
 <footer class="fdb-block footer-large bg-dark fp-active" data-block-type="footers" data-id="6">
@@ -162,27 +157,22 @@
 <script>
   const isIos = /iphone|ipad|ipod/.test(window.navigator.userAgent.toLowerCase());
   const isMobileDevice = /Mobi/i.test(window.navigator.userAgent);
+  const isAndroidApp = document.referrer.includes('android-app://');
   const isInStandaloneMode = (window.navigator.standalone) || (window.matchMedia('(display-mode: standalone)').matches); // https://web.dev/customize-install/
 
-  if ( isMobileDevice ) {
-    if ( isInStandaloneMode ) {
-      document.querySelector('#login-button').classList.toggle('d-none');
-    }
-    else if ( isIos ) {
-      const isSafari = !(/(CriOS|FxiOS|OPiOS|mercury)/i.test(window.navigator.userAgent));
-      const isInAppBrowser = /Instagram|Twitter|GSA|FBAN/.test(window.navigator.userAgent);
-      if ( isSafari && !isInAppBrowser ) {
-        document.querySelector('#apple-button').classList.toggle('d-none');
-      } else {
-        document.querySelector('#apple-safari-button').classList.toggle('d-none');
-      }
-    } else {
-      document.querySelector('#mobile-button').classList.toggle('d-none');
-    }
-  } else {
-    document.querySelector('#login-button').classList.toggle('d-none');
+  if ( isMobileDevice && !isIos && !isAndroidApp ) {
+    document.querySelector('#google-play-button').classList.remove('d-none');
   }
 
+  if ( isIos && !isInStandaloneMode ) {
+    const isSafari = !(/(CriOS|FxiOS|OPiOS|mercury)/i.test(window.navigator.userAgent));
+    const isInAppBrowser = /Instagram|Twitter|GSA|FBAN/.test(window.navigator.userAgent);
+    if ( isSafari && !isInAppBrowser ) {
+      document.querySelector('#apple-button').classList.remove('d-none');
+    } else {
+      document.querySelector('#apple-safari-button').classList.remove('d-none');
+    }
+  }
 
   // Make body fixed to show bottom bar with share button on safari
   $('#appleModal').on('show.bs.modal', function () {
@@ -209,8 +199,7 @@
   btnInstallApp.addEventListener('click', e => {
     if(deferredPrompt !== undefined) {
       deferredPrompt.prompt()
-      document.querySelector('#login-button').classList.remove('d-none')
-      document.querySelector('#mobile-button').classList.add('d-none')
+      // document.querySelector('#google-play-button').classList.add('d-none')
       // deferredPrompt.userChoice
       // .then(choiceResult => {
       //   if(choiceResult.outcome === 'accepted') {
