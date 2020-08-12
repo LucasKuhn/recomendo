@@ -16,21 +16,18 @@
 
       <h2>Bem vindo ao Recomendo</h2>
       <p class="lead">
-        Salve recomendações de filmes e seriados, recomende livros para seus amigos e descubra os podcasts que seus amigos mais gostam.
+        Salve recomendações de livros e filmes, recomende seriados para seus amigos e descubra os podcasts que seus amigos mais gostam.
       </p>
 
-      <div class="my-3 my-md-0">
-        <%= link_to "https://recomendoapp.com", class: "btn btn-lg btn-outline-secondary d-none", target:'_blank', id: 'open-app-button' do %>
-        Abrir app
-        <% end %>
+      <div class="my-3">
         <%= link_to "#", class: "btn btn-lg btn-outline-secondary d-none", data: {toggle: "modal", target: "#appleModal"}, id: 'apple-button' do %>
-        <i class="fab fa-apple"></i><br> Baixar
+          <i class="fab fa-apple"></i><br> Baixar
         <% end %>
         <%= link_to "#", class: "btn btn-lg btn-outline-secondary d-none", data: {toggle: "modal", target: "#appleSafariModal"}, id: 'apple-safari-button' do %>
-        <i class="fab fa-safari"></i> Abrir no Safari
+          <i class="fab fa-safari"></i> Abrir no Safari
         <% end %>
-        <%= link_to "#", class: "btn btn-lg btn-outline-secondary d-none", data: {toggle: "modal", target: "#mobileModal"}, id: 'mobile-button' do %>
-        <i class="fas fa-mobile"></i><br> Baixar
+        <%= link_to "https://play.google.com/store/apps/details?id=com.recomendoapp.www", class: "btn btn-lg btn-outline-secondary d-none", id: 'google-play-button', target: "_blank" do %>
+          <i class="fab fa-google-play"></i><br> Baixar
         <% end %>
       </div>
 
@@ -163,20 +160,19 @@
   const isAndroidApp = document.referrer.includes('android-app://');
   const isInStandaloneMode = (window.navigator.standalone) || (window.matchMedia('(display-mode: standalone)').matches); // https://web.dev/customize-install/
 
-  if ( !isInStandaloneMode || !isAndroidApp || isMobileDevice ) {
-    if ( isIos ) {
-      const isSafari = !(/(CriOS|FxiOS|OPiOS|mercury)/i.test(window.navigator.userAgent));
-      const isInAppBrowser = /Instagram|Twitter|GSA|FBAN/.test(window.navigator.userAgent);
-      if ( isSafari && !isInAppBrowser ) {
-        document.querySelector('#apple-button').classList.remove('d-none');
-      } else {
-        document.querySelector('#apple-safari-button').classList.remove('d-none');
-      }
-    } else {
-      document.querySelector('#mobile-button').classList.remove('d-none');
-    }
+  if ( isMobileDevice && !isIos && !isAndroidApp ) {
+    document.querySelector('#google-play-button').classList.remove('d-none');
   }
 
+  if ( isIos && !isInStandaloneMode ) {
+    const isSafari = !(/(CriOS|FxiOS|OPiOS|mercury)/i.test(window.navigator.userAgent));
+    const isInAppBrowser = /Instagram|Twitter|GSA|FBAN/.test(window.navigator.userAgent);
+    if ( isSafari && !isInAppBrowser ) {
+      document.querySelector('#apple-button').classList.remove('d-none');
+    } else {
+      document.querySelector('#apple-safari-button').classList.remove('d-none');
+    }
+  }
 
   // Make body fixed to show bottom bar with share button on safari
   $('#appleModal').on('show.bs.modal', function () {
@@ -203,7 +199,7 @@
   btnInstallApp.addEventListener('click', e => {
     if(deferredPrompt !== undefined) {
       deferredPrompt.prompt()
-      document.querySelector('#mobile-button').classList.add('d-none')
+      // document.querySelector('#google-play-button').classList.add('d-none')
       // deferredPrompt.userChoice
       // .then(choiceResult => {
       //   if(choiceResult.outcome === 'accepted') {
