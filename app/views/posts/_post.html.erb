@@ -16,8 +16,8 @@
         <small class="text-muted"><%= localize(post.created_at, format: :long) %></small>
       </div>
       <div class="ml-3">
-        <%= link_to post.category, class: "btn btn-primary btn-circle" do %>
-        <%= post.category.try(:icon) %>
+        <%= link_to post.category, class: "btn btn-circle background-#{post.category.name} btn-outline-light d-flex align-items-center justify-content-center" do %>
+          <%= post.category.try(:icon) %>
         <% end %>
       </div>
     </div>
