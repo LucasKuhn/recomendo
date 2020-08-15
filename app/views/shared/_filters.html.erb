@@ -1,64 +1,43 @@
-<div class="custom-box mx-md-2">
-  <%= link_to "#collapseExample", class: "btn btn-outline-secondary w-100 border-0", role: 'button', data: {toggle: 'collapse'} do %>
-    Explorar <i class="las la-search"></i>
+<% if @filtered_category %>
+
+<div class="my-3 p-3 bg-white border-radius-1 shadow-sm text-center position-relative">
+  <%= link_to :back, class: "position-absolute", style: "left: 25px; top:0; bottom:0;" do %>
+  <i class="fas fa-chevron-left h2 position-absolute text-secondary" style="top: 50%; transform: translateY(-50%)"></i>
   <% end %>
-  <div class="collapse" id="collapseExample">
-    <div class="my-3">
-      <h4>Categorias</h4>
-      <% Category.all.each do |category| %>
-      <% class_name = params[:category_id] == category.id.to_s ? "btn-primary" : "btn-light"  %>
-      <%= link_to posts_path(request.query_parameters.merge(category_id: category)), class: "btn btn-lg #{class_name} m-2" do %>
-      <%= category.plural_name_with_icon %>
-      <% end %>
-      <% end %>
-    </div>
+  <h2><%= @filtered_category.icon %></h2>
+  <h3><%= @filtered_category.name.pluralize.titleize %></h3>
+</div>
 
-    <!-- <div class="my-3">
-      <h4>Tags</h4>
-      <div>
-        <% ActsAsTaggableOn::Tag.all.each do |tag| %>
-        <% new_tags = params[:tags] ? { tags: [*params[:tags], tag.name] } : { tags: [tag.name] } %>
-        <%= link_to tag.name.titleize, posts_path(request.query_parameters.merge(new_tags)), class: "btn btn-light d-inline-block" %>
-        <% end %>
+<% else %>
+
+<div class="overflow-auto d-flex justify-content-xl-center mt-3">
+  <% Category.all.each do |category| %>
+  <%= link_to request.query_parameters.merge(category_id: category), class:"text-center btn bg-white border-radius-1 shadow-sm m-2 px-3 flex-fill" do %>
+  <div>
+    <h3><%= category.icon %></h3>
+    <h5><%= category.name.pluralize.titleize %></h5>
+  </div>
+  <% end %>
+  <% end %>
+</div>
+
+<% end %>
+
+<div class="d-none d-md-block row my-3 text-center">
+
+  <div class="col-6 my-3 mx-auto">
+    <div class="card border-0 border-radius-1 shadow-sm h-100 mx-md-2 overflow-hidden">
+      <div class="p-2">
+
+        <div class="d-flex justify-content-center">
+          <button type="button" class="btn btn-primary rounded-pill my-1 font-poppins" data-toggle="modal" data-target="#new-post-category">
+            <i class="las la-plus"></i>
+            Adicionar
+          </button>
+        </div>
+
       </div>
-    </div> -->
-
-    <div class="my-3">
-      <h4>Postagens</h4>
-      <%= link_to "De quem eu sigo", posts_path(request.query_parameters.except(:all)), class: "btn #{params[:all] ? "btn-light" : "btn-primary"}" %>
-      <%= link_to "De todos", posts_path(request.query_parameters.merge(all: true)), class: "btn #{params[:all] ? "btn-primary" : "btn-light"}" %>
-    </div>
-
-    <div class="my-3">
-      <h4>Pessoas</h4>
-      <%= link_to "Procurar", search_users_path, class: "btn btn-light" %>
     </div>
   </div>
 
-</div>
-
-
-<div class="filters my-3 mx-md-2">
-<% if @filtered_category %>
-<%= link_to posts_path(request.query_parameters.except(:category_id)), class: "btn btn-primary rounded-pill" do %>
-<i class="fas fa-times mr-2"></i>
-<%= @filtered_category.plural_name_with_icon %>
-<% end %>
-<% end %>
-
-<% if @filtered_tags %>
-<% @filtered_tags.each do |tag| %>
-<%= link_to posts_path(request.query_parameters.except(:tags)), class: "btn btn-info rounded-pill mx-1" do %>
-<i class="fas fa-times mr-2"></i>
-<%= tag %>
-<% end %>
-<% end %>
-<% end %>
-
-<% if @posts_from_all %>
-<%= link_to posts_path(request.query_parameters.except(:all)), class: "btn btn-primary rounded-pill mx-1" do %>
-<i class="fas fa-times mr-2"></i>
-Postagens de todos
-<% end %>
-<% end %>
 </div>
