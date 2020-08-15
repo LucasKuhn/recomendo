@@ -1,0 +1,57 @@
+<div class="my-3 py-3 bg-white border-radius-1 box-shadow">
+  <div class="row mx-3">
+    <div class="col-md-4">
+      <div class="d-flex align-items-center justify-content-center">
+        <div class="overflow-hidden rounded-circle" style="background-image: url('<%= url_for(@user.thumbnail) %>'); background-size: cover">
+          <%= image_tag @user.profile_image, size: 160 %>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-8 my-3">
+      <div class="d-flex justify-content-center justify-content-md-start">
+        <h2>
+          <small><%= @user.full_name %></small>
+        </h2>
+        <div class="my-auto mx-2">
+          <% if current_user == @user %>
+          <%= link_to edit_user_path, class: "h4" do %>
+          <i class="las la-cog"></i>
+          <% end %>
+          <% end %>
+        </div>
+      </div>
+
+      <div class="d-flex justify-content-center justify-content-md-start">
+        <div>
+          <% if @user == current_user %>
+            <table class="table table-sm mb-0 table-borderless">
+              <tr onclick="window.location='<%= user_followers_path(@user) %>'">
+                <td><strong><%= @user.followers_count - 1 %></strong></td>
+                <td>Seguidores</td>
+              </tr>
+              <tr>
+                <td><strong><%= @user.posts.count %></strong></td>
+                <td>Recomendações</td>
+                <td></td>
+                <td></td>
+              </tr>
+            </table>
+          <% else %>
+          <div class="text-center text-md-left px-1">
+            <strong><%= @user.posts.count %></strong>
+            Recomendações
+          </div>
+          <% end %>
+
+        </div>
+      </div>
+
+      <% if @user != current_user %>
+      <div class="my-2 text-center text-md-left">
+        <%= render "users/follow", user: @user %>
+      </div>
+      <% end %>
+
+    </div>
+  </div>
+</div>

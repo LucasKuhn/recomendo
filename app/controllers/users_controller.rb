@@ -6,7 +6,8 @@ class UsersController < ApplicationController
   end
 
   def show
-    @pagy, @posts = pagy(@user.posts, items: 4)
+    @pagy, @posts = pagy(Post.filter(params).posted_by(@user), items: 4)
+    @filtered_category = Category.find(params[:category_id]) if params[:category_id]
     respond_to do |format|
       format.html
       format.json {

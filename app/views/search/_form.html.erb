@@ -1,4 +1,4 @@
-<div class="p-3 bg-white border-radius-1 shadow text-center">
+<div class="p-3 mt-3 bg-white border-radius-1 shadow text-center">
   <ul class="nav nav-pills nav-fill w-100">
     <li class="nav-item">
       <%= link_to "Pessoas", search_users_path, class: "nav-link rounded-pill #{'active' if action_name == 'users'}" %>
@@ -13,12 +13,12 @@
   <div class="tab-content mt-4">
     <div class="tab-pane <%= 'active' if action_name == 'users' %>" id="people">
     <%= form_with url: search_users_path, method: :get, local: true do |form| %>
-      <%= form.text_field :q, placeholder: " Procurar", class: "form-control bg-creamy h4 m-0", id:"input", value: params[:q] %>
+      <%= form.text_field :q, placeholder: "  Explorar", class: "form-control bg-creamy h4 m-0", id:"input", value: params[:q] %>
     <% end %>
     </div>
     <div class="tab-pane  <%= 'active' if action_name == 'posts' %>" id="posts">
       <%= form_with url: search_posts_path, method: :get, local: true do |form| %>
-        <%= form.text_field :q, placeholder: " Procurar", class: "form-control bg-creamy h4 m-0", id:"input", value: params[:q] %>
+        <%= form.text_field :q, placeholder: "  Explorar", class: "form-control bg-creamy h4 m-0", id:"input", value: params[:q] %>
       <% end %>
     </div>
   </div>
