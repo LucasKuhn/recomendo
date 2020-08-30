@@ -50,3 +50,36 @@
 .background-outro {
   background-color: #efefef4D;
 }
+
+
+// Custom collapsibe post style
+
+.post-body {
+  position: relative;
+}
+.post-body .collapse, .post-body .collapsing {
+  display: block; // By default whats collapsed is hidden with display none
+  height: 6rem;
+  overflow: hidden;
+}
+
+.post-body .collapse.show {
+  height: auto; // Unset the fixed height after the collapse is done
+}
+
+.post-body .read-more {
+  opacity: 1;
+  transition: all .2s linear;
+  position: absolute;
+  bottom: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+
+  background-image: linear-gradient(to bottom, transparent 60%, white);
+}
+
+.post-body .read-more:not(.collapsed) {
+  visibility: hidden;
+}
