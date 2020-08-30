@@ -7,6 +7,10 @@ $headings-font-family: 'Poppins', sans-serif, 'FontAwesome';
 $custom-file-text: (
   pt-BR: "Procurar"
 );
+
+// https://stackoverflow.com/questions/46910998/how-to-change-the-font-size-with-sass-in-bootstrap-4
+$font-size-base: 0.875rem;
+
 $enable-responsive-font-sizes: true;
 $body-bg: #FFEAE4;
 
