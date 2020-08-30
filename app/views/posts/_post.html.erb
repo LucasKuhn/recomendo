@@ -33,7 +33,7 @@
 
     <div class="card-body">
       <div class="post-body">
-        <div class="read-more collapsed" type="button" data-toggle="collapse" data-target="#post_<%= post.id %>_collapse"></div>
+        <a class="read-more collapsed" href="#post_<%= post.id %>_collapse" data-toggle="collapse" role="button"></a>
 
         <div class="collapse" id="post_<%= post.id %>_collapse" aria-expanded="false">
           <h5 class="my-1"><%= post.title %></h5>
