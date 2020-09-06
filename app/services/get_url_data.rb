@@ -13,17 +13,17 @@ class GetUrlData
 
     data = get_data
 
-    if data["og_object"].blank?
+    if data.blank? || data["updated_time"].to_date < 2.weeks.ago
       scrape_url and return
     end
 
-    image_object = data["og_object"]["image"].try(:first)
+    image_object = data["image"].try(:first)
 
-    title = data["og_object"]["title"]
-    description = data["og_object"]["description"]
+    title = data["title"]
+    description = data["description"]
     image = image_object.try(:[],'url')
     image_ratio = get_ratio(image_object)
-    site_name = data["og_object"]["site_name"]
+    site_name = data["site_name"]
 
     {
       title: title,
@@ -58,14 +58,15 @@ class GetUrlData
     query = {
       id: url,
       access_token: ACCESS_TOKEN,
-      fields: "og_object{type, id, title, description, updated_time, image, video, site_name}",
+      fields: "og_object{type, id, title, description, updated_time, image, site_name}",
       scrape: true
     }
     uri = URI.parse(API_ENDPOINT)
     uri.query = URI.encode_www_form(query.to_a)
 
     response = Net::HTTP.get(uri)
-    JSON.parse(response)
+    json = JSON.parse(response)
+    json['og_object']
   end
 
   def scrape_url
