@@ -2,7 +2,7 @@ class DeleteUser
   class << self
 
     def run(user)
-      # singe delete call
+      #delete_all is a single SQL delete call
       user.likes.delete_all
 
       #destroy_all calls destroy on each object, deleting associated likes

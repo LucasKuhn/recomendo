@@ -30,7 +30,8 @@ Rails.application.routes.draw do
   root to: 'home#show'
 
   namespace :cors do
-    get 'get_title'
+    get :get_title
+    get :get_metadata
   end
 
   # Service Worker Routes

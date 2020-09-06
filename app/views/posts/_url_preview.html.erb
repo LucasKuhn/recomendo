@@ -1,0 +1,47 @@
+<% if !url_data['image'] %>
+
+<div class="card">
+  <div class="card-body pt-2">
+    <%= link_to url, class: "text-muted text-uppercase text-small stretched-link", target: "_blank" do %>
+    <%= url_data['site_name'] %>
+    <% end %>
+    <p class="m-0 font-weight-bold line-clamp-2"><%= url_data['title'] %></p>
+    <p class="m-0 text-truncate"><%= url_data['description'] %></p>
+  </div>
+</div>
+
+<% elsif url_data['image_ratio'] == 'square' %>
+
+<div class="card">
+  <div class="row no-gutters">
+    <div class="col-3 my-auto">
+      <%= image_tag url_data['image'], class: 'card-img', alt: "Preview image" %>
+    </div>
+    <div class="col-9">
+      <div class="card-body">
+        <%= link_to url, class: "text-muted text-uppercase text-small stretched-link", target: "_blank" do %>
+        <%= url_data['site_name'] %>
+        <% end %>
+        <p class="m-0 font-weight-bold line-clamp-2"><%= url_data['title'] %></p>
+        <p class="m-0 text-truncate"><%= url_data['description'] %></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<% else %>
+
+<div class="card">
+  <div class="embed-responsive embed-responsive-16by9">
+    <%= image_tag url_data['image'], class: 'card-img-top embed-responsive-item', style: "object-fit: cover", alt: "Preview image" %>
+  </div>
+  <div class="card-body pt-2">
+    <%= link_to url, class: "text-muted text-uppercase text-small stretched-link", target: "_blank" do %>
+    <%= url_data['site_name'] %>
+    <% end %>
+    <p class="m-0 font-weight-bold line-clamp-2"><%= url_data['title'] %></p>
+    <p class="m-0 text-truncate"><%= url_data['description'] %></p>
+  </div>
+</div>
+
+<% end %>

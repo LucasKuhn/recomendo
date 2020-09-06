@@ -8,9 +8,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#000000"/>
 
-  <!-- Meta Description should be page specific -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="Description" content="Recomendo App">
+
+  <!-- Meta Description should be page specific -->
+  <meta name="Description" content="Salve recomendações de livros e filmes, recomende seriados para seus amigos e descubra os podcasts que seus amigos mais gostam.">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Recomendo" />
+  <meta property="og:description" content="Salve recomendações de livros e filmes, recomende seriados para seus amigos e descubra os podcasts que seus amigos mais gostam." />
+  <meta property="og:image" content="<%= image_url("og-image") %>" />
+  <meta property="og:image:width" content="600" />
+  <meta property="og:image:heigth" content="315" />
+  <meta property="og:site_name" content="Recomendo" />
 
   <%= csrf_meta_tags %>
   <%= csp_meta_tag %>
@@ -52,10 +62,8 @@
 
   </div>
 
-  <%= render 'shared/modal' %>
-
   <%= render 'shared/footer' %>
 
-  <%= yield :bottom_modal %>
+  <%= render 'shared/modal' %>
 </body>
 </html>
