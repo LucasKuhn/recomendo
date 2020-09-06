@@ -37,11 +37,11 @@ class GetUrlData
   private
 
   def get_ratio(image_object)
-    if !image_object || !image_object['width'] || !image_object['heigth']
+    if !image_object || !image_object['width'] || !image_object['height']
       return 'square'
-    elsif image_object['width'] < 200 || image_object['heigth'] < 200
+    elsif image_object['width'] < 200 || image_object['height'] < 200
       return 'square'
-    elsif image_object['width'] / image_object['heigth'] = 1
+    elsif image_object['width'] / image_object['height'] = 1
       return 'square'
     else
       'landscape'
