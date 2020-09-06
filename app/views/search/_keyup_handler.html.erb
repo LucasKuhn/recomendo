@@ -15,11 +15,11 @@
     }
   }
 
-  $( "input" ).keyup(function() {
-    document.querySelector(`[data-target="infinite-scroll.entries"]`).innerHTML = spinner    
+  $('input[name="q"]').keyup(function() {
+    document.querySelector(`[data-target="infinite-scroll.entries"]`).innerHTML = spinner
   });
 
-  $('input').keyup(
+  $('input[name="q"]').keyup(
     delay(function (e) {
       Rails.ajax({
         type: 'GET',

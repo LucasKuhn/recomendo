@@ -38,20 +38,10 @@
         <div class="collapse" id="post_<%= post.id %>_collapse" aria-expanded="false">
           <h5 class="my-1"><%= post.title %></h5>
           <%= simple_format post.body %>
-          <% if post.url.present? %>
           <% if post.url_data %>
-          <div class="card">
-            <div class="embed-responsive embed-responsive-16by9">
-              <%= image_tag post.url_data[:image], class: 'card-img-top embed-responsive-item', style: "object-fit: cover", alt: "Preview image" %>
-            </div>
-            <div class="card-body pt-2">
-              <%= link_to "netflix.com", post.url, class: "text-muted text-uppercase text-small stretched-link", target: "_blank" %>
-              <p class="m-0 font-weight-bold"><%= post.url_data[:title] %></p>
-              <p class="m-0 text-truncate"><%= post.url_data[:description] %></p>
-            </div>
-          </div>
-          <% end %>
-          <%= link_to post.url, post.url, class: 'text-break text-small' %>
+            <%= render 'posts/url_preview', url_data: post.url_data, url: post.url %>
+          <% elsif post.url %>
+            <%= link_to post.url, post.url, class: 'text-break text-small' %>
           <% end %>
         </div>
       </div>

@@ -2,4 +2,8 @@
 
 <%= render 'shared/filters' %>
 
+<%= render 'shared/add_button' if @user == current_user %>
+
 <%= render 'posts/posts' %>
+
+<%= render 'shared/mobile_add_button' if @user == current_user %>

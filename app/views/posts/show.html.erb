@@ -30,11 +30,11 @@
     <%= link_to post.title, post, class: "text-dark", remote: true %>
     </h5>
 
-  <% if post.url.present? %>
-    <%= link_to post.url, target:"_blank" do %>
-    Acessar link <i class="fas fa-angle-right"></i>
+    <% if post.url_data %>
+      <%= render 'posts/url_preview', url_data: post.url_data, url: post.url %>
+    <% elsif post.url %>
+      <%= link_to post.url, post.url, class: 'text-break text-small' %>
     <% end %>
-  <% end %>
 
   <p>
     <%= simple_format post.body %>

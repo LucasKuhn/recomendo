@@ -46,3 +46,33 @@ Benchmark.bm do |benchmark|
     end
   end
 end
+
+Post.all.each do |post|
+  post.update_url_metadata
+end
+
+
+n = 10
+uri = URI('https://www.google.com/')
+
+Benchmark.bm do |benchmark|
+  benchmark.report("without thread") do
+    p "without thread"
+    n.times do
+      response = Net::HTTP.get(uri)
+      p "response"
+      p response.class
+    end
+  end
+
+  benchmark.report("inside thread") do
+    p "With Thread"
+    n.times do
+      Thread.new do
+        response = Net::HTTP.get(uri)
+        p "response"
+        p response.class
+      end
+    end
+  end
+end
