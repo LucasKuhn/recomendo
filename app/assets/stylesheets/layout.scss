@@ -80,3 +80,8 @@ html {
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
+
+// https://github.com/turbolinks/turbolinks#displaying-progress
+.turbolinks-progress-bar {
+  background-color: #eb6b564D;
+}
