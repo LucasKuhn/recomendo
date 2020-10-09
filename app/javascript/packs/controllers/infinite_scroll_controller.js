@@ -8,14 +8,17 @@ export default class extends Controller {
     console.log("Scroll called")
     let next_page = this.paginationTarget.querySelector("a[rel='next']")
     // console.log(next_page)
-    if(next_page == null) { return }
+    if(next_page == null) {
+      this.hideSpinner()
+      return
+    }
     // console.log(window.pageYOffset)
     let url = next_page.href
     var body = document.body
     var html = document.documentElement
     var height = Math.max(body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight)
     // console.log(height)
-    if (window.pageYOffset >= height - window.innerHeight - 300) {
+    if (window.pageYOffset >= height - window.innerHeight - 500) {
       if ( !this.loading_more ) {
         this.loading_more = true
         // console.log("loading_more")
@@ -23,6 +26,11 @@ export default class extends Controller {
       }
     }
 
+  }
+
+  hideSpinner() {
+    // console.log('hidding spinner')
+    document.querySelector("#spinner").classList.add('d-none')
   }
 
   loadMore(url) {

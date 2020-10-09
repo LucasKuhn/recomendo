@@ -9,7 +9,7 @@ class PostsController < ApplicationController
     else
       posts = Post.filter(params).posted_by(current_user.followings)
     end
-    @pagy, @posts = pagy(posts, items: 6)
+    @pagy, @posts = pagy(posts, items: 2)
     @filtered_category = Category.find(params[:category_id]) if params[:category_id]
     @filtered_tags = params[:tags]
     @posts_from_all = params[:all].present?
