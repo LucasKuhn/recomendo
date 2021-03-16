@@ -4,7 +4,7 @@ class SearchController < ApplicationController
     if params[:q].present?
       users = User.where("CONCAT(first_name, ' ' ,last_name) ILIKE ?", "%#{params[:q]}%").order(followers_count: :desc, created_at: :desc)
     else
-      users = User.all.order(followers_count: :desc, created_at: :desc)
+      users = User.all.order(created_at: :desc, followers_count: :desc)
     end
     @pagy, @users = pagy(users, items: 8)
     respond_to do |format|

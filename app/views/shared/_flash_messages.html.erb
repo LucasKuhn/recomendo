@@ -1,8 +1,10 @@
 <% flash.each do |flash_type, message| %>
-  <div class="alert <%= alert_class(flash_type) %> alert-dismissible fade show" role="alert">
+<div class="animate__animated animate__bounceInDown my-3 position-absolute" style="left:0;right:0">
+  <div class="alert <%= alert_class(flash_type) %> alert-dismissible fade show animate__animated animate__bounceOutUp animate__delay-3s" role="alert">
     <%= message %>
     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
+</div>
 <% end %>

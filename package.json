@@ -2,6 +2,7 @@
   "name": "recomendo",
   "private": true,
   "dependencies": {
+    "@hotwired/turbo-rails": "^7.0.0-beta.5",
     "@rails/actioncable": "^6.0.0-alpha",
     "@rails/activestorage": "^6.0.0-alpha",
     "@rails/ujs": "^6.0.0-alpha",
@@ -9,8 +10,7 @@
     "bootstrap": "^4.4.1",
     "jquery": "^3.4.1",
     "popper.js": "^1.16.1",
-    "stimulus": "^1.1.1",
-    "turbolinks": "^5.2.0"
+    "stimulus": "^1.1.1"
   },
   "version": "0.1.0",
   "devDependencies": {

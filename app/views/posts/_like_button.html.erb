@@ -2,14 +2,14 @@
 
 <% if like %>
 
-<%= link_to post_like_path(post, like), method: :delete, class: "btn btn-sm rounded-pill btn-outline-primary border-0 text-decoration-none d-flex align-items-center", remote: true do %>
-  <i class="fas fa-heart mr-1"></i><small><%= post.likes.count if post.likes.count > 0 %></small>
+<%= link_to post_like_path(post, like), method: :delete, class: "rounded-pill border-0 text-decoration-none d-flex align-items-center", remote: true do %>
+  <i class="fas fa-heart mr-1"></i><small><%= post.likes.count if post.likes.count > 0 %>&nbsp;</small>
 <% end %>
 
 <% else %>
 
-<%= link_to post_likes_path(post), method: :post, class: "btn btn-sm rounded-pill btn-outline-primary border-0 text-decoration-none d-flex align-items-center", remote: true do %>
-  <i class="far fa-heart mr-1"></i> <small><%= post.likes.count if post.likes.count > 0 %></small>
+<%= link_to post_likes_path(post), method: :post, class: "rounded-pill border-0 text-decoration-none d-flex align-items-center", remote: true do %>
+  <i class="far fa-heart mr-1"></i><small><%= post.likes.count if post.likes.count > 0 %>&nbsp;</small>
 <% end %>
 
 <% end %>

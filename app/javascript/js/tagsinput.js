@@ -691,6 +691,6 @@ $(function() {
   $("input[data-role=tagsinput], select[multiple][data-role=tagsinput]").tagsinput();
 });
 
-document.addEventListener('turbolinks:load', function(){
+document.addEventListener('turbo:load', function(){
   $("input[data-role=tagsinput], select[multiple][data-role=tagsinput]").tagsinput();
 });

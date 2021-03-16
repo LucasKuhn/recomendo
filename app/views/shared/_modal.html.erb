@@ -1,5 +1,5 @@
 <!-- Category Select -->
-<div class="modal fade" id="new-post-category" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-turbolinks-permanent>
+<div class="modal fade" id="new-post-category" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-turbo-permanent>
   <div class="modal-dialog modal-dialog-centered modal-lg">
     <div class="modal-content">
       <div class="modal-header">
@@ -17,7 +17,7 @@
         <div class="col my-2">
           <%= link_to "#", class: "btn btn-lg btn-light btn-outline-secondary w-100 border-radius-1", data: {dismiss: 'modal', toggle: 'modal', target: '#new-post-modal', category_id: category.id, category_name: category.name_with_icon } do %>
             <%= category.icon %> <br>
-            <%= category.name %>
+            <%= category.name.titleize %>
           <% end %>
         </div>
         <% end %>
@@ -28,7 +28,7 @@
   </div>
 </div>
 
-<div class="modal fade" id="new-post-modal" tabindex="-1" role="dialog" aria-labelledby="new-post-modalLabel" aria-hidden="true" data-turbolinks-permanent>
+<div class="modal fade" id="new-post-modal" tabindex="-1" role="dialog" aria-labelledby="new-post-modalLabel" aria-hidden="true" data-tubo-permanent>
   <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
