@@ -1,2 +1,4 @@
 document.querySelector("#post_<%= @post.id %> .like")
 .innerHTML = "<%= j render 'posts/like_button', post: @post %>";
+
+document.querySelector("#post_<%= @post.id %> .like a").classList.add("animate__animated", "animate__bounceIn");

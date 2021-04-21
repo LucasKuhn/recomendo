@@ -37,10 +37,13 @@
 
   <!-- Compiled Stylesheets and JS -->
   <%= stylesheet_pack_tag 'application', media: 'all' %> <!-- Webpacker -->
-  <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %> <!-- Webpacker -->
-  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %> <!-- Custom assets/stylesheets -->
+  <%= javascript_pack_tag 'application', 'data-turbo-track': 'reload' %> <!-- Webpacker -->
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbo-track': 'reload' %> <!-- Custom assets/stylesheets -->
 
   <link rel="stylesheet" async href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
+
+  <!-- https://animate.style/ -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 </head>
 
 <body>

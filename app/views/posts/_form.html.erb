@@ -16,9 +16,9 @@
 
 <%= form_with(model: post, local: true) do |f| %>
 
-  <div class="form-group">
+  <div class="form-label-group">
+    <%= f.text_field :title, class:"form-control", autofocus: true, required: true %>
     <%= f.label :title, "Título" %>
-    <%= f.text_field :title, class:"form-control", placeholder:"O que você gostou?", autofocus: true, required: true %>
   </div>
 
   <div class="form-group">

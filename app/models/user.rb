@@ -33,7 +33,7 @@ class User < ApplicationRecord
     if image.attached?
       image
     else
-      "https://api.adorable.io/avatars/285/#{email}"
+      "https://avatars.dicebear.com/api/initials/#{full_name}.svg"
     end
   end
 
@@ -46,7 +46,7 @@ class User < ApplicationRecord
   end
 
   def adorable_avatar
-    "https://api.adorable.io/avatars/100/#{email}"
+    "https://avatars.dicebear.com/api/initials/#{full_name}.svg"
   end
 
   # https://mensfeld.pl/2013/12/rails-devise-and-remember_me-rememberable-by-default/

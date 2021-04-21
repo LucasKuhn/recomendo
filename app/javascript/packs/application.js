@@ -9,9 +9,10 @@ import Rails from '@rails/ujs';
 Rails.start();
 window.Rails = Rails;
 
-import Turbolinks from 'turbolinks';
-Turbolinks.start();
+import { Turbo } from "@hotwired/turbo-rails"
+window.Turbo = Turbo
 
+import "@hotwired/turbo-rails"
 import * as ActiveStorage from "@rails/activestorage";
 ActiveStorage.start();
 
@@ -54,3 +55,9 @@ import { definitionsFromContext } from "stimulus/webpack-helpers"
 const application = Application.start()
 const context = require.context("./controllers", true, /\.js$/)
 application.load(definitionsFromContext(context))
+
+
+
+$(document).on("turbo:load", () => {
+  console.log("Turbo!!!")
+})

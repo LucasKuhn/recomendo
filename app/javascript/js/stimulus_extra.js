@@ -2,7 +2,7 @@ window.addEventListener('load', function(){
   dispatchScroll()
 });
 
-document.addEventListener('turbolinks:load', function(){
+document.addEventListener('turbo:load', function(){
   setTimeout(dispatchScroll, 100);
 });
 
